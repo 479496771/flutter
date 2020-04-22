@@ -1,21 +1,16 @@
 import 'package:dio/dio.dart';
 import 'dart:async';
+// import '../config/service.dart';
+import 'dart:convert';
 import '../config/service.dart';
 
-// const servicePath = {
-//   "test": serviceUrl + 'test',
-//   "testDetail": serviceUrl + 'detail',
-// };
-Response<String> response;
-
-Future getTestData () async{
+getTestData () async{
   try {
-    response = await dio.get("/test");
-    if(response.statusCode == 200){
-      print('接口正常。。。。。。。。。。。。。。。。。。。。。。。。。');
-      return response.data;
+    final response = await Api.get("/test");
+    if(response["status"] == 4001) {
+      return response["data"];
     } else {
-      throw Exception('接口错误');
+      return {};
     }
   } catch (e) {
     return print('ERROR =======> $e');

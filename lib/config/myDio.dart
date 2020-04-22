@@ -97,3 +97,30 @@ class Api {
     }
   }
 }
+
+
+
+class Item {
+  final String name;
+  final Map<String, dynamic> id;
+
+  Item({this.name, this.id});
+
+  factory Item.fromJson(dynamic json) {
+    return new Item(
+      name: json['name'],
+      id: json['id'],
+    );
+  }
+}
+
+class MyList {
+  List<Item> data;
+  MyList(this.data);
+
+  factory MyList.fromJson(List json) {
+    return MyList(
+      json.map((i) => Item.fromJson((i))).toList()
+    );
+  }
+}

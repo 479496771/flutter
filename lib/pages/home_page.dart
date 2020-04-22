@@ -7,7 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String showText = '正在输入数据';
+  dynamic showContent = '正在输入数据';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Text('请求数据'),
               ),
-              Text(showText)
+              Text(showContent),
             ]
           )
         ),
@@ -35,7 +35,8 @@ class _HomePageState extends State<HomePage> {
     print('开始像极客时间请求数据.............');
     getTestData().then((res) {
       setState(() {
-        showText = res;
+        res ??= '暂无数据';
+        showContent =  res["total"].toString();
         print(res);
       });
     });
